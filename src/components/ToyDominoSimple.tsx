@@ -1,4 +1,5 @@
 import { Physics, RigidBody } from '@react-three/rapier';
+import { button, useControls } from 'leva';
 import { useState } from 'react';
 
 const dominoHeight = 1.4;
@@ -39,6 +40,17 @@ const dominoSettings: DominoType[] = [
 
 export const ToyDominoSimple = () => {
   const [debug, setDebug] = useState<boolean>(true);
+  const [isStart, setIsStart] = useState<boolean>(false);
+  const [isReset, setIsReset] = useState<boolean>(false);
+
+  useControls({
+    debugMode: { value: debug, onChange: setDebug },
+    start: button(() => setIsStart(true)),
+    reset: button(() => {
+      setIsReset(true);
+      setIsStart(false);
+    }),
+  });
 
   return (
     <>
