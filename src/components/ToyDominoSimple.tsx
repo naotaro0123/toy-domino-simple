@@ -7,8 +7,8 @@ const dominoHeight = 1.4;
 const dominoPosY = 0;
 const floorOffset = 0.05;
 const floorPosY = -dominoHeight / 2 - floorOffset;
-const ballPosY = -0.5;
-const ballPosZ = -4;
+const ballPosY = -0.4;
+const ballPosZ = -4.8;
 
 type DominoType = {
   id: string;
@@ -22,7 +22,7 @@ const createDominoMesh = (domino: DominoType) => {
   return (
     <RigidBody colliders="cuboid">
       <mesh key={id} name={id} position={position} rotation={rotation} castShadow>
-        <boxGeometry args={[0.4, dominoHeight, 0.2]} />
+        <boxGeometry args={[0.6, dominoHeight, 0.2]} />
         <meshStandardMaterial color={color} />
       </mesh>
     </RigidBody>
@@ -41,7 +41,7 @@ const createBallMesh = (isStart: boolean) => {
 
   return (
     <RigidBody ref={rb} colliders="ball" position={[0, ballPosY, ballPosZ]}>
-      <Sphere args={[0.4]} castShadow>
+      <Sphere args={[0.4]}>
         <meshStandardMaterial color={'red'} />
       </Sphere>
     </RigidBody>
