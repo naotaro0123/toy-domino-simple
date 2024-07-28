@@ -8,20 +8,26 @@ const dominoPosY = 0;
 const floorOffset = 0.05;
 const floorPosY = -dominoHeight / 2 - floorOffset;
 const ballPosY = -0.4;
-const ballPosZ = -4.8;
+const ballPosZ = 4.2;
+
+const randomColor = (): string => {
+  const r = Math.floor(Math.random() * 255);
+  const g = Math.floor(Math.random() * 255);
+  const b = Math.floor(Math.random() * 255);
+  return `rgb(${r},${g},${b})`;
+};
 
 type DominoType = {
-  id: string;
   position: [number, number, number];
   rotation?: [number, number, number];
   color: string;
 };
 
-const createDominoMesh = (domino: DominoType) => {
-  const { id, position, rotation, color } = domino;
+const createDominoMesh = (domino: DominoType, i: number) => {
+  const { position, rotation, color } = domino;
   return (
     <RigidBody colliders="cuboid">
-      <mesh key={id} name={id} position={position} rotation={rotation} castShadow>
+      <mesh key={i} position={position} rotation={rotation} castShadow>
         <boxGeometry args={[0.6, dominoHeight, 0.2]} />
         <meshStandardMaterial color={color} />
       </mesh>
@@ -35,14 +41,14 @@ const createBallMesh = (isStart: boolean) => {
   useEffect(() => {
     if (isStart && rb.current) {
       rb.current.setTranslation({ x: 0, y: ballPosY, z: ballPosZ }, true);
-      rb.current.setLinvel({ x: 0, y: 0, z: 2 }, true);
+      rb.current.setLinvel({ x: 0, y: 0, z: -4 }, true);
     }
   });
 
   return (
     <RigidBody ref={rb} colliders="ball" position={[0, ballPosY, ballPosZ]}>
       <Sphere args={[0.4]}>
-        <meshStandardMaterial color={'red'} />
+        <meshStandardMaterial color={randomColor()} />
       </Sphere>
     </RigidBody>
   );
@@ -59,18 +65,45 @@ const createFloorMesh = () => {
   );
 };
 
-const randomColor = (): string => {
-  const r = Math.floor(Math.random() * 255);
-  const g = Math.floor(Math.random() * 255);
-  const b = Math.floor(Math.random() * 255);
-  return `rgb(${r},${g},${b})`;
-};
-
 const dominoSettings: DominoType[] = [
-  { id: '1', position: [0, dominoPosY, 1], color: randomColor() },
-  { id: '2', position: [0, dominoPosY, 2], color: randomColor() },
-  { id: '3', position: [0, dominoPosY, 3], color: randomColor() },
-  { id: '4', position: [0, dominoPosY, 4], color: randomColor() },
+  { position: [0, dominoPosY, 3.0], color: randomColor() },
+  { position: [0, dominoPosY, 2.2], color: randomColor() },
+  { position: [0, dominoPosY, 1.4], color: randomColor() },
+  { position: [0, dominoPosY, 0.6], color: randomColor() },
+  { position: [0, dominoPosY, -0.2], color: randomColor() },
+  { position: [0, dominoPosY, -1.0], color: randomColor() },
+  { position: [0.2, dominoPosY, -1.8], rotation: [0, -Math.PI / 4, 0], color: randomColor() },
+  { position: [0.8, dominoPosY, -2.2], rotation: [0, -Math.PI / 2, 0], color: randomColor() },
+  { position: [1.6, dominoPosY, -2.2], rotation: [0, -Math.PI / 2, 0], color: randomColor() },
+  { position: [2.4, dominoPosY, -2.2], rotation: [0, -Math.PI / 2, 0], color: randomColor() },
+  { position: [3.2, dominoPosY, -2.2], rotation: [0, -Math.PI / 2, 0], color: randomColor() },
+  { position: [4.0, dominoPosY, -2.0], rotation: [0, Math.PI / 4, 0], color: randomColor() },
+  { position: [4.4, dominoPosY, -1.4], color: randomColor() },
+  { position: [4.4, dominoPosY, -0.6], color: randomColor() },
+  { position: [4.0, dominoPosY, 0.2], rotation: [0, -Math.PI / 4, 0], color: randomColor() },
+  { position: [3.2, dominoPosY, 0.6], rotation: [0, -Math.PI / 2, 0], color: randomColor() },
+  { position: [2.2, dominoPosY, 0.6], rotation: [0, -Math.PI / 2, 0], color: randomColor() },
+  { position: [1.4, dominoPosY, 0.6], rotation: [0, -Math.PI / 2, 0], color: randomColor() },
+  { position: [0.44, dominoPosY, 0.6], rotation: [0, -Math.PI / 2, 0], color: randomColor() },
+  {
+    position: [0.44, dominoPosY + dominoHeight, 0.6],
+    rotation: [0, -Math.PI / 2, 0],
+    color: randomColor(),
+  },
+  { position: [-0.44, dominoPosY, 0.6], rotation: [0, -Math.PI / 2, 0], color: randomColor() },
+  {
+    position: [-0.44, dominoPosY + dominoHeight, 0.6],
+    rotation: [0, -Math.PI / 2, 0],
+    color: randomColor(),
+  },
+  {
+    position: [0, dominoPosY + dominoHeight * 2 - 0.2, 0.6],
+    rotation: [Math.PI / 2, 0, Math.PI / 2],
+    color: randomColor(),
+  },
+  { position: [-1.4, dominoPosY, 0.6], rotation: [0, -Math.PI / 2, 0], color: randomColor() },
+  { position: [-2.2, dominoPosY, 0.6], rotation: [0, -Math.PI / 2, 0], color: randomColor() },
+  { position: [-3.0, dominoPosY, 0.6], rotation: [0, -Math.PI / 2, 0], color: randomColor() },
 ];
 
 export const ToyDominoSimple = () => {
@@ -92,7 +125,7 @@ export const ToyDominoSimple = () => {
       <Physics debug={debug} colliders={false}>
         {createBallMesh(isStart)}
         {createFloorMesh()}
-        {dominoSettings.map((domino) => createDominoMesh(domino))}
+        {dominoSettings.map((domino, i) => createDominoMesh(domino, i))}
       </Physics>
     </>
   );

@@ -6,7 +6,8 @@ import { ToyDominoSimple } from './components/ToyDominoSimple';
 function App() {
   return (
     <>
-      <Canvas camera={{ position: [0, 6, -10], zoom: 1.6 }}>
+      {/* <Canvas camera={{ position: [0, 6, -10], zoom: 1.6 }}> */}
+      <Canvas camera={{ position: [0, 14, 0], zoom: 1.6 }}>
         <color attach="background" args={['lightgray']} />
         <OrbitControls />
         <ToyDominoSimple />
