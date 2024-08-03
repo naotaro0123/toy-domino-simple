@@ -1,7 +1,7 @@
-import { Sphere } from '@react-three/drei';
-import { RapierRigidBody, RigidBody } from '@react-three/rapier';
-import { useEffect, useRef } from 'react';
-import { BallSetting } from '../utils/dominoSetting';
+import { Sphere } from "@react-three/drei";
+import { RapierRigidBody, RigidBody } from "@react-three/rapier";
+import { useEffect, useRef } from "react";
+import { BallSetting } from "../utils/dominoSetting";
 
 export const createBallMesh = (isStart: boolean, setting: BallSetting) => {
   const rb = useRef<RapierRigidBody>(null);
@@ -17,7 +17,11 @@ export const createBallMesh = (isStart: boolean, setting: BallSetting) => {
   });
 
   return (
-    <RigidBody ref={rb} colliders="ball" position={[position.x, position.y, position.z]}>
+    <RigidBody
+      ref={rb}
+      colliders="ball"
+      position={[position.x, position.y, position.z]}
+    >
       <Sphere args={[0.4]}>
         <meshStandardMaterial color="red" />
       </Sphere>
