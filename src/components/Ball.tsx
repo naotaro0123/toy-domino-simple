@@ -11,7 +11,7 @@ export const createBallMesh = (isStart: boolean, setting: BallSetting) => {
     if (isStart && rb.current) {
       // initial Position
       rb.current.setTranslation(position, true);
-      // rolling direction
+      // rolling direction and speed
       rb.current.setLinvel(linvel, true);
     }
   });

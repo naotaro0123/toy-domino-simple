@@ -241,4 +241,6 @@ export const stage1: DominoType[] = [
     ...Array.from({ length: 4 }, () => colorWhite),
     ...Array.from({ length: 4 }, () => colorDarkYellow),
   ]),
+  // mario line 0
+  ...marioDominoLine(6.0, [...Array.from({ length: 12 }, () => colorWhite)]),
 ];

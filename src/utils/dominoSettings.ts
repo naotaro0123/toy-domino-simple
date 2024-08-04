@@ -5,11 +5,11 @@ import { stage1 } from './stage1';
 export type BallSetting = {
   // initial Position
   position: { x: number; y: number; z: number };
-  // rolling direction
+  // rolling direction and speed
   linvel: { x: number; y: number; z: number };
 };
 
-type DominoSetting = {
+export type DominoSetting = {
   dominos: DominoType[];
   ball: BallSetting;
   floor: { args: [number, number, number] };

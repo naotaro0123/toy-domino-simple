@@ -4,12 +4,13 @@ import { button, useControls } from 'leva';
 import { useState } from 'react';
 import './App.css';
 import { ToyDominoSimple } from './components/ToyDominoSimple';
+import { dominoSettings } from './utils/dominoSettings';
 
 const stages = [0, 1] as const;
 type StageType = (typeof stages)[number];
 
 function App() {
-  const [debug, setDebug] = useState<boolean>(true);
+  const [debug, setDebug] = useState<boolean>(false);
   const [isStart, setIsStart] = useState<boolean>(false);
   const [stage, setStage] = useState<StageType>(0);
 
@@ -20,7 +21,7 @@ function App() {
 
   useControls({
     debugMode: { value: debug, onChange: setDebug },
-    stage: { value: stage, options: stages, onChange: changeStage },
+    selectStage: { value: stage, options: stages, onChange: changeStage },
     start: button(() => setIsStart(true)),
     reset: button(() => window.location.reload()),
   });
@@ -28,11 +29,29 @@ function App() {
   return (
     <>
       <Canvas>
-        <PerspectiveCamera position={[6, 6, 12]} zoom={2.2} makeDefault={stage === 0} />
-        <OrthographicCamera position={[0, 14, 0]} zoom={38} makeDefault={stage === 1} />
         <color attach="background" args={['lightgray']} />
+        <group>
+          <directionalLight position={[5, 5, 3]} intensity={2} />
+          <directionalLight position={[-5, -5, -3]} intensity={2} />
+        </group>
         <OrbitControls />
-        <ToyDominoSimple debug={debug} isStart={isStart} stage={stage} />
+
+        {stage === 0 ? (
+          <>
+            <PerspectiveCamera position={[6, 6, 12]} zoom={2.2} makeDefault />
+            <ToyDominoSimple debug={debug} isStart={isStart} setting={dominoSettings[0]} />
+          </>
+        ) : (
+          <></>
+        )}
+        {stage === 1 ? (
+          <>
+            <OrthographicCamera position={[0, 14, 0]} zoom={32} makeDefault />
+            <ToyDominoSimple debug={debug} isStart={isStart} setting={dominoSettings[1]} />
+          </>
+        ) : (
+          <></>
+        )}
       </Canvas>
     </>
   );
