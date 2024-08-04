@@ -1,7 +1,7 @@
 import { dominoHeight, dominoPosY, DominoType } from '../components/Domino';
 import { randomColor } from './color';
 
-const settings1: DominoType[] = [
+const settings0: DominoType[] = [
   { position: [0, dominoPosY, 3.0], color: randomColor() },
   { position: [0, dominoPosY, 2.2], color: randomColor() },
   { position: [0, dominoPosY, 1.4], color: randomColor() },
@@ -42,6 +42,11 @@ const settings1: DominoType[] = [
   { position: [-3.0, dominoPosY, 0.6], rotation: [0, -Math.PI / 2, 0], color: randomColor() },
 ];
 
+const settings1: DominoType[] = [
+  { position: [0, dominoPosY, 3.0], color: randomColor() },
+  { position: [0, dominoPosY, 2.2], color: randomColor() },
+];
+
 export type BallSetting = {
   // initial Position
   position: { x: number; y: number; z: number };
@@ -52,14 +57,24 @@ export type BallSetting = {
 type DominoSetting = {
   dominos: DominoType[];
   ball: BallSetting;
+  floor: { args: [number, number, number] };
 };
 
 export const dominoSettings: DominoSetting[] = [
+  {
+    dominos: settings0,
+    ball: {
+      position: { x: 0, y: -0.4, z: 4.2 },
+      linvel: { x: 0, y: 0, z: -4 },
+    },
+    floor: { args: [10, 0.1, 10] },
+  },
   {
     dominos: settings1,
     ball: {
       position: { x: 0, y: -0.4, z: 4.2 },
       linvel: { x: 0, y: 0, z: -4 },
     },
+    floor: { args: [20, 0.1, 20] },
   },
 ];
