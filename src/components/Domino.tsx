@@ -1,4 +1,5 @@
-import { RigidBody } from '@react-three/rapier';
+import { RapierRigidBody, RigidBody } from '@react-three/rapier';
+import { useRef } from 'react';
 
 export type DominoType = {
   position: [number, number, number];
@@ -15,8 +16,18 @@ const boxMeshFixedColor = 'white';
 
 export const createDominoMesh = (domino: DominoType, i: number) => {
   const { position, rotation, color } = domino;
+  const ref = useRef<RapierRigidBody>(null);
+
   return (
-    <RigidBody colliders="cuboid" key={i}>
+    <RigidBody
+      ref={ref}
+      colliders="cuboid"
+      key={i}
+      onCollisionEnter={(payload) => {
+        console.log(payload.colliderObject?.uuid, ref.current?.isSleeping());
+        // TODO: play sound
+      }}
+    >
       <mesh position={position} rotation={rotation} castShadow>
         <boxGeometry args={[0.6, dominoHeight, 0.2]} />
 

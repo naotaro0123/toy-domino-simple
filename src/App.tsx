@@ -44,6 +44,7 @@ function App() {
         ) : (
           <></>
         )}
+
         {stage === 1 ? (
           <>
             <OrthographicCamera position={[0, 14, 0]} zoom={32} makeDefault />
