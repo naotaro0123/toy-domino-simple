@@ -19,3 +19,9 @@ $ yarn build
 # Lint Fix
 $ yarn lint
 ```
+
+## reference
+
+- [sounds](https://soundeffect-lab.info/sound/various/various3.html)
+
+- [mario image](https://pixel-art.tsurezure-brog.com/home/super-mario-chibi/)
