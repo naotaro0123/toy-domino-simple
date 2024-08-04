@@ -1,7 +1,7 @@
 import { Physics } from '@react-three/rapier';
 import { button, useControls } from 'leva';
 import { useState } from 'react';
-import { dominoSettings } from '../utils/dominoSetting';
+import { dominoSettings } from '../utils/dominoSettings';
 import { createBallMesh } from './Ball';
 import { createDominoMesh } from './Domino';
 import { createFloorMesh } from './Floor';
