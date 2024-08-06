@@ -7,7 +7,7 @@ const floorPosY = -dominoHeight / 2 - floorOffset;
 
 export const createFloorMesh = (props: BoxGeometryProps) => {
   return (
-    <RigidBody type="fixed" colliders="cuboid" position={[0, floorPosY, 0]}>
+    <RigidBody name="Floor-RigidBody" type="fixed" colliders="cuboid" position={[0, floorPosY, 0]}>
       <mesh castShadow>
         <boxGeometry {...props} />
         <meshStandardMaterial color={'grey'} />
