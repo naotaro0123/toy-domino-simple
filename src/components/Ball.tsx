@@ -17,7 +17,12 @@ export const createBallMesh = (isStart: boolean, setting: BallSetting) => {
   });
 
   return (
-    <RigidBody ref={rb} colliders="ball" position={[position.x, position.y, position.z]}>
+    <RigidBody
+      ref={rb}
+      name="Ball-RigidBody"
+      colliders="ball"
+      position={[position.x, position.y, position.z]}
+    >
       <Sphere args={[0.4]}>
         <meshStandardMaterial color="red" />
       </Sphere>

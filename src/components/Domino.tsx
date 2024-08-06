@@ -9,6 +9,7 @@ export type DominoType = {
 
 export const dominoPosY = 0;
 export const dominoHeight = 1.4;
+const dominoPrefix = 'domino-';
 
 const boxMeshTopIndex = 2;
 const boxMeshBottomIndex = 3;
@@ -22,9 +23,18 @@ export const createDominoMesh = (domino: DominoType, i: number) => {
     <RigidBody
       ref={ref}
       colliders="cuboid"
+      name={`${dominoPrefix}${i}-RigidBody`}
       key={i}
-      onCollisionEnter={(payload) => {
-        console.log(payload.colliderObject?.uuid, ref.current?.isSleeping());
+      onContactForce={(payload) => {
+        const { colliderObject, target } = payload;
+        if (
+          colliderObject?.name.startsWith(dominoPrefix) &&
+          target?.colliderObject?.name.startsWith(dominoPrefix) &&
+          !('isHit' in target.colliderObject.userData)
+        ) {
+          target.colliderObject.userData.isHit = true;
+        }
+        console.log(payload, target.colliderObject?.userData);
         // TODO: play sound
       }}
     >
