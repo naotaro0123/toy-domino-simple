@@ -1,7 +1,6 @@
 import { RapierRigidBody, RigidBody } from '@react-three/rapier';
 import { useRef } from 'react';
 import { ballPrefix } from './Ball';
-import { ChildMethods, Sound } from './Sound';
 
 export type DominoType = {
   position: [number, number, number];
@@ -20,18 +19,13 @@ const boxMeshFixedColor = 'white';
 type DominoProps = {
   domino: DominoType;
   i: number;
+  isStart: boolean;
+  onPlaySound: () => void;
 };
 
-export const Domino = ({ domino, i }: DominoProps) => {
+export const Domino = ({ domino, i, isStart, onPlaySound }: DominoProps) => {
   const { position, rotation, color } = domino;
   const ref = useRef<RapierRigidBody>(null);
-  const soundRef = useRef<ChildMethods>(null);
-
-  const soundPlay = () => {
-    if (soundRef.current) {
-      soundRef.current.playSound();
-    }
-  };
 
   return (
     <>
@@ -41,6 +35,10 @@ export const Domino = ({ domino, i }: DominoProps) => {
         name={`${dominoPrefix}${i}-RigidBody`}
         key={i}
         onContactForce={(payload) => {
+          if (!isStart) {
+            return;
+          }
+
           const { colliderObject, target } = payload;
 
           // Check if both objects are dominoes and the target domino has not been hit yet.
@@ -51,8 +49,7 @@ export const Domino = ({ domino, i }: DominoProps) => {
             !('isHit' in target.colliderObject.userData)
           ) {
             target.colliderObject.userData.isHit = true;
-
-            soundPlay();
+            onPlaySound();
           }
         }}
       >
@@ -69,7 +66,6 @@ export const Domino = ({ domino, i }: DominoProps) => {
           ))}
         </mesh>
       </RigidBody>
-      <Sound ref={soundRef} />
     </>
   );
 };
