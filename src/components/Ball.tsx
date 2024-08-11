@@ -3,7 +3,14 @@ import { RapierRigidBody, RigidBody } from '@react-three/rapier';
 import { useEffect, useRef } from 'react';
 import { BallSetting } from '../utils/dominoSettings';
 
-export const createBallMesh = (isStart: boolean, setting: BallSetting) => {
+export const ballPrefix = 'ball-';
+
+type BallProps = {
+  isStart: boolean;
+  setting: BallSetting;
+};
+
+export const Ball = ({ isStart, setting }: BallProps) => {
   const rb = useRef<RapierRigidBody>(null);
   const { position, linvel } = setting;
 
@@ -19,7 +26,7 @@ export const createBallMesh = (isStart: boolean, setting: BallSetting) => {
   return (
     <RigidBody
       ref={rb}
-      name="Ball-RigidBody"
+      name={`${ballPrefix}-RigidBody`}
       colliders="ball"
       position={[position.x, position.y, position.z]}
     >

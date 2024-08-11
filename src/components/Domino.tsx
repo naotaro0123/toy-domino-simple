@@ -1,5 +1,6 @@
 import { RapierRigidBody, RigidBody } from '@react-three/rapier';
 import { useRef } from 'react';
+import { ballPrefix } from './Ball';
 
 export type DominoType = {
   position: [number, number, number];
@@ -15,7 +16,12 @@ const boxMeshTopIndex = 2;
 const boxMeshBottomIndex = 3;
 const boxMeshFixedColor = 'white';
 
-export const createDominoMesh = (domino: DominoType, i: number) => {
+type DominoProps = {
+  domino: DominoType;
+  i: number;
+};
+
+export const Domino = ({ domino, i }: DominoProps) => {
   const { position, rotation, color } = domino;
   const ref = useRef<RapierRigidBody>(null);
 
@@ -25,17 +31,25 @@ export const createDominoMesh = (domino: DominoType, i: number) => {
       colliders="cuboid"
       name={`${dominoPrefix}${i}-RigidBody`}
       key={i}
+      userData={{ isHit: false }}
       onContactForce={(payload) => {
         const { colliderObject, target } = payload;
+        // Check if both objects are dominoes and the target domino has not been hit yet.
         if (
-          colliderObject?.name.startsWith(dominoPrefix) &&
+          (colliderObject?.name.startsWith(ballPrefix) ||
+            colliderObject?.name.startsWith(dominoPrefix)) &&
           target?.colliderObject?.name.startsWith(dominoPrefix) &&
-          !('isHit' in target.colliderObject.userData)
+          'isHit' in target.colliderObject.userData &&
+          !target.colliderObject.userData.isHit
         ) {
           target.colliderObject.userData.isHit = true;
+          console.log(
+            colliderObject?.name,
+            target.colliderObject?.name,
+            target.colliderObject?.userData,
+          );
+          // TODO: play sound
         }
-        console.log(payload, target.colliderObject?.userData);
-        // TODO: play sound
       }}
     >
       <mesh position={position} rotation={rotation} castShadow>

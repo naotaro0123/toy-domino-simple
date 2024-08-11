@@ -1,8 +1,9 @@
 import { Physics } from '@react-three/rapier';
 import { DominoSetting } from '../utils/dominoSettings';
-import { createBallMesh } from './Ball';
-import { createDominoMesh } from './Domino';
-import { createFloorMesh } from './Floor';
+import { Ball } from './Ball';
+import { Domino } from './Domino';
+import { Floor } from './Floor';
+import { Sound } from './Sound';
 
 type ToyDominoProps = {
   debug: boolean;
@@ -15,9 +16,12 @@ export const ToyDominoSimple = (props: ToyDominoProps) => {
   return (
     <>
       <Physics debug={debug} colliders={false}>
-        {createBallMesh(isStart, setting.ball)}
-        {createFloorMesh(setting.floor)}
-        {setting.dominos.map((domino, i) => createDominoMesh(domino, i))}
+        <Ball isStart={isStart} setting={setting.ball} />
+        <Floor args={setting.floor.args} />
+        <Sound />
+        {setting.dominos.map((domino, i) => (
+          <Domino key={i} domino={domino} i={i} />
+        ))}
       </Physics>
     </>
   );
