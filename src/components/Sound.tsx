@@ -6,7 +6,8 @@ export type ChildMethods = {
   playSound: () => void;
 };
 
-const soundUrl = '/toy-domino-simple/sounds/domino-collision.mp3';
+// this sound was random generated at `https://sfxr.me`.
+const soundUrl = './toy-domino-simple/sounds/domino.wav';
 
 export const Sound = forwardRef((_, ref) => {
   const sound = useRef<THREE.PositionalAudio>(null);
@@ -26,6 +27,9 @@ export const Sound = forwardRef((_, ref) => {
   useImperativeHandle(ref, () => ({
     playSound() {
       if (sound.current) {
+        if (sound.current.isPlaying) {
+          sound.current.stop();
+        }
         sound.current.play();
       }
     },
