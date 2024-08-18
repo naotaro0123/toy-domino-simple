@@ -20,6 +20,7 @@ export const Sound = forwardRef((_, ref) => {
     if (!sound.current || !listener) return;
 
     sound.current.setBuffer(buffer);
+    sound.current.setVolume(0.1);
     camera.add(listener);
   }, []);
 
