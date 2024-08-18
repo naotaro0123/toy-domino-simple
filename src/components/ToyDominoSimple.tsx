@@ -1,5 +1,6 @@
 import { InstancedRigidBodies, Physics } from '@react-three/rapier';
 import { useRef } from 'react';
+import { randomColor } from '../utils/color';
 import { DominoSetting } from '../utils/dominoSettings';
 import { Ball, ballPrefix } from './Ball';
 import { Floor } from './Floor';
@@ -36,18 +37,15 @@ export const ToyDominoSimple = (props: ToyDominoProps) => {
               if (!isStart) {
                 return;
               }
-
               const { colliderObject, target } = payload;
-              console.log('#', colliderObject?.name, target?.colliderObject?.name);
 
               // Check if both objects are dominoes and the target domino has not been hit yet.
               if (
-                (colliderObject?.name.startsWith(ballPrefix) ||
-                  colliderObject?.name.startsWith(dominoPrefix)) &&
-                target?.colliderObject?.name.startsWith(dominoPrefix) &&
+                (colliderObject?.parent?.name.startsWith(ballPrefix) ||
+                  colliderObject?.parent?.name.startsWith(dominoPrefix)) &&
+                target?.colliderObject?.parent?.name.startsWith(dominoPrefix) &&
                 !('isHit' in target.colliderObject.userData)
               ) {
-                console.log('hit');
                 target.colliderObject.userData.isHit = true;
                 playSound();
               }
@@ -57,9 +55,21 @@ export const ToyDominoSimple = (props: ToyDominoProps) => {
         >
           <instancedMesh args={[undefined, undefined, setting.dominos.length]} dispose={null}>
             <boxGeometry args={[0.6, dominoHeight, 0.2]} />
-            <meshStandardMaterial color="white" />
+            <meshStandardMaterial color={randomColor()} />
+            {/* {Array.from({ length: 6 }).map((_, i) => (
+              <meshStandardMaterial
+                key={i}
+                attach={`material-${i}`}
+                color={
+                  i === boxMeshTopIndex || i === boxMeshBottomIndex
+                    ? boxMeshFixedColor
+                    : randomColor()
+                }
+              />
+            ))} */}
           </instancedMesh>
         </InstancedRigidBodies>
+
         {/* {setting.dominos.map((domino, i) => (
           <Domino key={i} domino={domino} i={i} isStart={isStart} onPlaySound={playSound} />
         ))} */}

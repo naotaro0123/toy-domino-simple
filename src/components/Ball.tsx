@@ -26,7 +26,7 @@ export const Ball = ({ isStart, setting }: BallProps) => {
   return (
     <RigidBody
       ref={rb}
-      name={`${ballPrefix}-RigidBody`}
+      name={`${ballPrefix}RigidBody`}
       colliders="ball"
       position={[position.x, position.y, position.z]}
     >
