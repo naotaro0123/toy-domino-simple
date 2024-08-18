@@ -1,12 +1,10 @@
-import { DominoType } from '../components/InstancedDomino';
+import { DominoType } from '../components/Domino';
 import { stage0 } from './stage0';
 import { stage1 } from './stage1';
 
 export type BallSetting = {
   // initial Position
   position: { x: number; y: number; z: number };
-  // initial Rotation
-  rotation: { x: number; y: number; z: number };
   // rolling direction and speed
   linvel: { x: number; y: number; z: number };
 };
@@ -21,7 +19,6 @@ export const dominoSettings: DominoSetting[] = [
   {
     dominos: stage0,
     ball: {
-      rotation: { x: 0, y: 0, z: 0 },
       position: { x: 0, y: -0.4, z: 4.2 },
       linvel: { x: 0, y: 0, z: -4 },
     },
@@ -30,7 +27,6 @@ export const dominoSettings: DominoSetting[] = [
   {
     dominos: stage1,
     ball: {
-      rotation: { x: 0, y: 0, z: 0 },
       position: { x: 0, y: -0.4, z: -9.5 },
       linvel: { x: 0, y: 0, z: 8 },
     },
