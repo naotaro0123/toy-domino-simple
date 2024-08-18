@@ -12,9 +12,9 @@ export const dominoPosY = 0;
 export const dominoHeight = 1.4;
 export const dominoPrefix = 'domino-';
 
-export const boxMeshTopIndex = 2;
-export const boxMeshBottomIndex = 3;
-export const boxMeshFixedColor = 'white';
+const boxMeshTopIndex = 2;
+const boxMeshBottomIndex = 3;
+const boxMeshFixedColor = 'white';
 
 type DominoProps = {
   domino: DominoType;
