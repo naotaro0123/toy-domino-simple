@@ -62,7 +62,7 @@ function App() {
             <ToyDominoSimple debug={debug} isStart={isStart} setting={dominoSettings[stage]} />
             <PlateauTilesetTransform>
               <PlateauTileset
-                path="6e/675ee1-e89e-4038-b568-c3b5e06ff559/13303_mizuho-machi_pref_2023_citygml_1_op_bldg_3dtiles_lod1"
+                path="a4/8ce415-8a43-485b-86a8-b09300dc94ff/13101_chiyoda-ku_pref_2023_citygml_1_op_bldg_3dtiles_13101_chiyoda-ku_lod1"
                 center
               />
             </PlateauTilesetTransform>
