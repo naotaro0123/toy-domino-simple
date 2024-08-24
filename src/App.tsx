@@ -3,6 +3,8 @@ import { Canvas } from '@react-three/fiber';
 import { button, useControls } from 'leva';
 import { useState } from 'react';
 import './App.css';
+import { PlateauTileset } from './components/PlateauTileset';
+import { PlateauTilesetTransform } from './components/PlateauTilesetTransform';
 import { ToyDominoSimple } from './components/ToyDominoSimple';
 import { dominoSettings } from './utils/dominoSettings';
 
@@ -58,6 +60,12 @@ function App() {
           <>
             <PerspectiveCamera position={[6, 6, 12]} zoom={1} makeDefault />
             <ToyDominoSimple debug={debug} isStart={isStart} setting={dominoSettings[stage]} />
+            <PlateauTilesetTransform>
+              <PlateauTileset
+                path="6e/675ee1-e89e-4038-b568-c3b5e06ff559/13303_mizuho-machi_pref_2023_citygml_1_op_bldg_3dtiles_lod1"
+                center
+              />
+            </PlateauTilesetTransform>
           </>
         ) : (
           <></>
