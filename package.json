@@ -13,7 +13,7 @@
   "dependencies": {
     "3d-tiles-renderer": "^0.3.36",
     "@react-three/drei": "^9.111.3",
-    "@react-three/fiber": "^8.17.5",
+    "@react-three/fiber": "^8.17.6",
     "@react-three/rapier": "^1.4.0",
     "@types/three": "^0.167.2",
     "eslint-config-prettier": "^9.1.0",
