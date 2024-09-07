@@ -5,7 +5,7 @@ export const PlateauTilesetTransformContext = createContext({
   setCenter: (center: Vector3): void => {},
 });
 
-type PlateauTilesetTransformProps = {
+export type PlateauTilesetTransformProps = {
   children: ReactNode;
 };
 
