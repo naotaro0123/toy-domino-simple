@@ -3,6 +3,8 @@ import { Canvas } from '@react-three/fiber';
 import { button, useControls } from 'leva';
 import { useState } from 'react';
 import './App.css';
+import { PlateauTileset } from './components/PlateauTileset';
+import { PlateauTilesetTransform } from './components/PlateauTilesetTransform';
 import { ToyDominoSimple } from './components/ToyDominoSimple';
 import { dominoSettings } from './utils/dominoSettings';
 
@@ -54,7 +56,7 @@ function App() {
           <></>
         )}
 
-        {/* {stage === 2 ? (
+        {stage === 2 ? (
           <>
             <PerspectiveCamera position={[6, 6, 12]} zoom={1} makeDefault />
             <ToyDominoSimple debug={debug} isStart={isStart} setting={dominoSettings[stage]} />
@@ -67,7 +69,7 @@ function App() {
           </>
         ) : (
           <></>
-        )} */}
+        )}
       </Canvas>
     </>
   );

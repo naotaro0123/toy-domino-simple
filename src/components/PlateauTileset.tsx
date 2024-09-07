@@ -1,7 +1,7 @@
 import { TilesRenderer } from '3d-tiles-renderer';
 import { useFrame, useThree } from '@react-three/fiber';
 import { useCallback, useContext, useEffect, useRef, useState } from 'react';
-import { Box3, Matrix4, Mesh, MeshStandardMaterial, Vector3 } from 'three';
+import { Box3, Matrix4, Mesh, MeshStandardMaterial, Quaternion, Vector3 } from 'three';
 import { DRACOLoader, GLTFLoader } from 'three-stdlib';
 import { CesiumRTCPlugin } from '../plugins/CesiumRTCPlugin';
 import { PlateauTilesetTransformContext } from './PlateauTilesetTransform';
@@ -20,8 +20,8 @@ type PlateauTilesetProps = {
   center?: boolean;
 };
 
-const { setCenter } = useContext(PlateauTilesetTransformContext);
 export const PlateauTileset = ({ path, center = false }: PlateauTilesetProps) => {
+  const { setState } = useContext(PlateauTilesetTransformContext);
   const centerRef = useRef(center);
   centerRef.current = center;
 
@@ -46,7 +46,17 @@ export const PlateauTileset = ({ path, center = false }: PlateauTilesetProps) =>
           box.applyMatrix4(matrix);
           const center = new Vector3();
           box.getCenter(center);
-          setCenter(center);
+          // setCenter(center);
+          {
+            const direction = center.clone().normalize();
+            const up = new Vector3(0, 1, 0);
+            const rotation = new Quaternion();
+            rotation.setFromUnitVectors(direction, up);
+            setState({
+              offset: new Vector3(0, -center.length(), 0),
+              rotation,
+            });
+          }
         }
       });
       const scene = useThree(({ scene }) => scene);
@@ -85,7 +95,7 @@ export const PlateauTileset = ({ path, center = false }: PlateauTilesetProps) =>
 
       return tiles;
     },
-    [setCenter],
+    [setState],
   );
 
   // TilesRenderer のライフサイクル
