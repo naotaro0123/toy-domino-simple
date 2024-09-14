@@ -1,5 +1,6 @@
 import { Physics } from '@react-three/rapier';
 import { useRef } from 'react';
+import { StageType } from '../App';
 import { DominoSetting } from '../utils/dominoSettings';
 import { Ball } from './Ball';
 import { Domino } from './Domino';
@@ -10,10 +11,11 @@ type ToyDominoProps = {
   debug: boolean;
   isStart: boolean;
   setting: DominoSetting;
+  stage: StageType;
 };
 
 export const ToyDominoSimple = (props: ToyDominoProps) => {
-  const { debug, isStart, setting } = props;
+  const { debug, isStart, setting, stage } = props;
   const soundRef = useRef<ChildMethods>(null);
 
   const playSound = () => {
@@ -27,6 +29,7 @@ export const ToyDominoSimple = (props: ToyDominoProps) => {
       <Physics debug={debug} colliders={false}>
         <Ball isStart={isStart} setting={setting.ball} />
         <Floor args={setting.floor.args} />
+        {stage === 2 ? <></> : <> </>}
         {setting.dominos.map((domino, i) => (
           <Domino key={i} domino={domino} i={i} isStart={isStart} onPlaySound={playSound} />
         ))}

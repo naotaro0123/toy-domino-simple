@@ -39,6 +39,6 @@ export const dominoSettings: DominoSetting[] = [
       position: { x: 0, y: -0.4, z: 4.2 },
       linvel: { x: 0, y: 0, z: -4 },
     },
-    floor: { args: [40, 0.1, 40] },
+    floor: { args: [12, 0.1, 12] },
   },
 ];

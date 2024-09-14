@@ -7,7 +7,7 @@ import { ToyDominoSimple } from './components/ToyDominoSimple';
 import { dominoSettings } from './utils/dominoSettings';
 
 const stages = [0, 1, 2] as const;
-type StageType = (typeof stages)[number];
+export type StageType = (typeof stages)[number];
 
 function App() {
   const [debug, setDebug] = useState<boolean>(false);
@@ -39,7 +39,12 @@ function App() {
         {stage === 0 ? (
           <>
             <PerspectiveCamera position={[6, 6, 12]} zoom={2.2} makeDefault />
-            <ToyDominoSimple debug={debug} isStart={isStart} setting={dominoSettings[stage]} />
+            <ToyDominoSimple
+              debug={debug}
+              isStart={isStart}
+              setting={dominoSettings[stage]}
+              stage={stage}
+            />
           </>
         ) : (
           <></>
@@ -48,20 +53,30 @@ function App() {
         {stage === 1 ? (
           <>
             <OrthographicCamera position={[0, 14, 0]} zoom={32} makeDefault />
-            <ToyDominoSimple debug={debug} isStart={isStart} setting={dominoSettings[stage]} />
+            <ToyDominoSimple
+              debug={debug}
+              isStart={isStart}
+              setting={dominoSettings[stage]}
+              stage={stage}
+            />
           </>
         ) : (
           <></>
         )}
 
-        {/* {stage === 2 ? (
+        {stage === 2 ? (
           <>
             <PerspectiveCamera position={[6, 6, 12]} zoom={1} makeDefault />
-            <ToyDominoSimple debug={debug} isStart={isStart} setting={dominoSettings[stage]} />
+            <ToyDominoSimple
+              debug={debug}
+              isStart={isStart}
+              setting={dominoSettings[stage]}
+              stage={stage}
+            />
           </>
         ) : (
           <></>
-        )} */}
+        )}
       </Canvas>
     </>
   );
