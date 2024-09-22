@@ -6,13 +6,14 @@ import './App.css';
 import { ToyDominoSimple } from './components/ToyDominoSimple';
 import { dominoSettings } from './utils/dominoSettings';
 
-const stages = [0, 1, 2] as const;
+const stages = [0, 1, 2, 3] as const;
 export type StageType = (typeof stages)[number];
+const defaultStage = 2 as const;
 
 function App() {
   const [debug, setDebug] = useState<boolean>(false);
   const [isStart, setIsStart] = useState<boolean>(false);
-  const [stage, setStage] = useState<StageType>(0);
+  const [stage, setStage] = useState<StageType>(defaultStage);
 
   const changeStage = (stage: StageType) => {
     setStage(stage);
@@ -65,6 +66,20 @@ function App() {
         )}
 
         {stage === 2 ? (
+          <>
+            <OrthographicCamera position={[0, 14, 0]} zoom={32} makeDefault />
+            <ToyDominoSimple
+              debug={debug}
+              isStart={isStart}
+              setting={dominoSettings[stage]}
+              stage={stage}
+            />
+          </>
+        ) : (
+          <></>
+        )}
+
+        {stage === 3 ? (
           <>
             <PerspectiveCamera position={[6, 6, 12]} zoom={1} makeDefault />
             <ToyDominoSimple

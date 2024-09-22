@@ -2,6 +2,7 @@ import { DominoType } from '../components/Domino';
 import { stage0 } from './stage0';
 import { stage1 } from './stage1';
 import { stage2 } from './stage2';
+import { stage3 } from './stage3';
 
 export type BallSetting = {
   // initial Position
@@ -35,6 +36,14 @@ export const dominoSettings: DominoSetting[] = [
   },
   {
     dominos: stage2,
+    ball: {
+      position: { x: 0, y: -0.4, z: -9.5 },
+      linvel: { x: 0, y: 0, z: 8 },
+    },
+    floor: { args: [20, 0.1, 20] },
+  },
+  {
+    dominos: stage3,
     ball: {
       position: { x: 0, y: -0.4, z: 4.2 },
       linvel: { x: 0, y: 0, z: -4 },
