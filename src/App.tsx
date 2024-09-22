@@ -8,7 +8,7 @@ import { dominoSettings } from './utils/dominoSettings';
 
 const stages = [0, 1, 2, 3] as const;
 export type StageType = (typeof stages)[number];
-const defaultStage = 2 as const;
+const defaultStage = 0 as const;
 
 function App() {
   const [debug, setDebug] = useState<boolean>(false);
@@ -37,6 +37,7 @@ function App() {
         </group>
         <OrbitControls />
 
+        {/* MEMO: この書き方でないとStage切替時にボールなどが初期化されない */}
         {stage === 0 ? (
           <>
             <PerspectiveCamera position={[6, 6, 12]} zoom={2.2} makeDefault />

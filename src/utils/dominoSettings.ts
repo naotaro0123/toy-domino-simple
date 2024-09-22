@@ -29,8 +29,8 @@ export const dominoSettings: DominoSetting[] = [
   {
     dominos: stage1,
     ball: {
-      position: { x: 0, y: -0.4, z: -9.5 },
-      linvel: { x: 0, y: 0, z: 8 },
+      position: { x: -9.5, y: -0.4, z: 0 },
+      linvel: { x: 4, y: 0, z: 0 },
     },
     floor: { args: [20, 0.1, 20] },
   },
