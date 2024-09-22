@@ -4,7 +4,7 @@ import { button, useControls } from 'leva';
 import { useState } from 'react';
 import './App.css';
 import { ToyDominoSimple } from './components/ToyDominoSimple';
-import { dominoSettings } from './utils/dominoSettings';
+import { dominoSettings } from './settings/dominoSettings';
 
 const stages = [0, 1, 2] as const;
 export type StageType = (typeof stages)[number];
@@ -37,7 +37,7 @@ function App() {
         </group>
         <OrbitControls />
 
-        {/* MEMO: この書き方でないとStage切替時にボールなどが初期化されない */}
+        {/* MEMO: code below initializes the stages */}
         {stage === 0 ? (
           <>
             <PerspectiveCamera position={[6, 6, 12]} zoom={2.2} makeDefault />

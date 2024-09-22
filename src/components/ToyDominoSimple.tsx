@@ -1,7 +1,7 @@
 import { Physics } from '@react-three/rapier';
 import { useRef } from 'react';
 import { StageType } from '../App';
-import { DominoSetting } from '../utils/dominoSettings';
+import { DominoSetting } from '../settings/dominoSettings';
 import { Ball } from './Ball';
 import { Domino } from './Domino';
 import { Floor } from './Floor';

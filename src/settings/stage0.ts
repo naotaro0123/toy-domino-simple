@@ -1,5 +1,5 @@
 import { dominoHeight, dominoPosY, DominoType } from '../components/Domino';
-import { randomColor } from './color';
+import { randomColor } from '../utils/color';
 
 export const stage0: DominoType[] = [
   { position: [0.0, dominoPosY, 3.2], color: randomColor() },

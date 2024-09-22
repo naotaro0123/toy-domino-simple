@@ -1,7 +1,7 @@
 import { Sphere } from '@react-three/drei';
 import { RapierRigidBody, RigidBody } from '@react-three/rapier';
 import { useEffect, useRef } from 'react';
-import { BallSetting } from '../utils/dominoSettings';
+import { BallSetting } from '../settings/dominoSettings';
 
 export const ballPrefix = 'ball-';
 

@@ -1,13 +1,14 @@
 import { useLoader, useThree } from '@react-three/fiber';
 import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import * as THREE from 'three';
+import { isLocalhost } from '../utils/url';
 
 export type ChildMethods = {
   playSound: () => void;
 };
 
 // this sound was random generated at `https://sfxr.me`.
-const soundUrl = './toy-domino-simple/sounds/domino.wav';
+const soundUrl = `./${isLocalhost() ? 'toy-domino-simple' : ''}/sounds/domino.wav`;
 
 export const Sound = forwardRef((_, ref) => {
   const sound = useRef<THREE.PositionalAudio>(null);
