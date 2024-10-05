@@ -10,6 +10,19 @@ const stages = [0, 1, 2] as const;
 export type StageType = (typeof stages)[number];
 const defaultStage = 0 as const;
 
+type StageCameraProps = {
+  stage: StageType;
+};
+const StageCamera = (props: StageCameraProps) => {
+  switch (props.stage) {
+    case 0:
+      return <PerspectiveCamera position={[6, 6, 12]} zoom={2.2} makeDefault />;
+    case 1:
+    case 2:
+      return <OrthographicCamera position={[0, 14, 0]} zoom={32} makeDefault />;
+  }
+};
+
 function App() {
   const [debug, setDebug] = useState<boolean>(false);
   const [isStart, setIsStart] = useState<boolean>(false);
@@ -37,48 +50,14 @@ function App() {
         </group>
         <OrbitControls />
 
-        {/* MEMO: code below initializes the stages */}
-        {stage === 0 ? (
-          <>
-            <PerspectiveCamera position={[6, 6, 12]} zoom={2.2} makeDefault />
-            <ToyDominoSimple
-              debug={debug}
-              isStart={isStart}
-              setting={dominoSettings[stage]}
-              stage={stage}
-            />
-          </>
-        ) : (
-          <></>
-        )}
-
-        {stage === 1 ? (
-          <>
-            <OrthographicCamera position={[0, 14, 0]} zoom={32} makeDefault />
-            <ToyDominoSimple
-              debug={debug}
-              isStart={isStart}
-              setting={dominoSettings[stage]}
-              stage={stage}
-            />
-          </>
-        ) : (
-          <></>
-        )}
-
-        {stage === 2 ? (
-          <>
-            <OrthographicCamera position={[0, 14, 0]} zoom={32} makeDefault />
-            <ToyDominoSimple
-              debug={debug}
-              isStart={isStart}
-              setting={dominoSettings[stage]}
-              stage={stage}
-            />
-          </>
-        ) : (
-          <></>
-        )}
+        <StageCamera stage={stage} />
+        <ToyDominoSimple
+          key={stage}
+          debug={debug}
+          isStart={isStart}
+          setting={dominoSettings[stage]}
+          stage={stage}
+        />
       </Canvas>
     </>
   );
